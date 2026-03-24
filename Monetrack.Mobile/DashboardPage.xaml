@@ -1,0 +1,41 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Monetrack.Mobile.DashboardPage"
+             Title="Мои финансы">
+
+    <VerticalStackLayout Spacing="20" Padding="30">
+
+        <Label Text="Твой баланс:" FontSize="18" HorizontalOptions="Center"/>
+
+        <Label x:Name="BalanceLabel" Text="Загрузка..." FontSize="36" FontAttributes="Bold" HorizontalOptions="Center" TextColor="Green"/>
+
+        <Label Text="История операций:" FontSize="18" FontAttributes="Bold" Margin="0,20,0,0"/>
+
+        <CollectionView x:Name="TransactionsList" HeightRequest="300">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="0,0,0,10" Padding="15" CornerRadius="8" BackgroundColor="#F8F9FA">
+                        <HorizontalStackLayout Spacing="15">
+                            <Label Text="{Binding Note}" FontSize="16" VerticalOptions="Center" WidthRequest="200"/>
+                            <Label Text="{Binding Amount, StringFormat='{0:F2} ₴'}" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" TextColor="Black"/>
+                        </HorizontalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Text="+ Добавить 1000 ₴ (Зарплата)" 
+                Clicked="OnAddTestTransactionClicked" 
+                BackgroundColor="#27AE60" 
+                TextColor="White" 
+                CornerRadius="10" 
+                Margin="0,10,0,0"/>
+
+        <Button Text="Выйти" 
+                Clicked="OnLogoutClicked" 
+                BackgroundColor="#E74C3C" 
+                TextColor="White" 
+                CornerRadius="10" 
+                Margin="0,20,0,0"/>
+
+    </VerticalStackLayout>
+</ContentPage>

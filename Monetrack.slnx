@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="Monetrack.API/Monetrack.API.csproj" Id="ab72a48a-5bdd-4e40-8697-e029e44393ca" />
+  <Project Path="Monetrack.Mobile/Monetrack.Mobile.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
+  <Project Path="Monetrack.Shared/Monetrack.Shared.csproj" />
+</Solution>

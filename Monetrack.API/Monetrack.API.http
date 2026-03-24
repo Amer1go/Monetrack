@@ -1,0 +1,6 @@
+@Monetrack.API_HostAddress = http://localhost:5036
+
+GET {{Monetrack.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
