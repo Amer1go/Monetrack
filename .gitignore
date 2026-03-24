@@ -1,6 +1,9 @@
 # Секретные данные
 .env
 *.pem
+appsettings.json
+secrets.json
+appsettings.Development.json
 
 # IDE и редакторы
 .vscode/
