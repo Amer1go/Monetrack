@@ -1,0 +1,41 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Monetrack.Mobile.AddTransactionPage"
+             Title="Новий запис">
+
+    <VerticalStackLayout Spacing="20" Padding="30">
+
+        <Label Text="Сума (UAH):" FontSize="18" FontAttributes="Bold" TextColor="#2B0B98"/>
+        <Entry x:Name="AmountEntry" Keyboard="Numeric" Placeholder="0.00" FontSize="24" ClearButtonVisibility="WhileEditing"/>
+
+        <Label Text="Опис:" FontSize="18" FontAttributes="Bold" TextColor="#2B0B98" Margin="0,10,0,0"/>
+        <Entry x:Name="NoteEntry" Placeholder="Наприклад: Кафе або Магазин" FontSize="18" ClearButtonVisibility="WhileEditing"/>
+
+        <Label Text="Тип операції:" FontSize="18" FontAttributes="Bold" TextColor="#2B0B98" Margin="0,10,0,0"/>
+
+        <Picker x:Name="TypePicker" Title="Обери тип" FontSize="18" SelectedIndexChanged="OnTypeChanged">
+            <Picker.Items>
+                <x:String>Витрата</x:String>
+                <x:String>Дохід</x:String>
+            </Picker.Items>
+        </Picker>
+
+        <Label Text="Категорія:" FontSize="18" FontAttributes="Bold" TextColor="#2B0B98" Margin="0,10,0,0"/>
+
+        <Picker x:Name="CategoryPicker" Title="Обери категорію" FontSize="18" ItemDisplayBinding="{Binding Name}" />
+
+        <Button Text="Зберегти" 
+                Clicked="OnSaveClicked" 
+                BackgroundColor="#27AE60" 
+                TextColor="White" 
+                CornerRadius="10" 
+                HeightRequest="50" 
+                Margin="0,30,0,0"/>
+
+        <Button Text="Відміна" 
+                Clicked="OnCancelClicked" 
+                BackgroundColor="Transparent" 
+                TextColor="Gray" />
+
+    </VerticalStackLayout>
+</ContentPage>

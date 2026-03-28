@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Monetrack.Mobile.SettingsPage"
+             Title="Налаштування">
+
+    <VerticalStackLayout Spacing="20" Padding="30">
+
+        <Frame CornerRadius="15" BackgroundColor="#F8F9FA" HasShadow="True" Padding="20" BorderColor="LightGray">
+            <HorizontalStackLayout Spacing="15">
+                <Frame WidthRequest="60" HeightRequest="60" CornerRadius="30" BackgroundColor="#2980B9" Padding="0" HasShadow="False">
+                    <Label Text="П" FontSize="24" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </Frame>
+
+                <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                    <Label Text="Портніцька" FontSize="20" FontAttributes="Bold" TextColor="Black"/>
+                    <Label Text="C# Розробниця | 2 курс КПІ" FontSize="14" TextColor="Gray"/>
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+        </Frame>
+
+        <Label Text="Вигляд" FontSize="16" FontAttributes="Bold" Margin="0,10,0,0" TextColor="Gray"/>
+
+        <Frame CornerRadius="10" BackgroundColor="#F8F9FA" Padding="15" BorderColor="LightGray">
+            <Grid ColumnDefinitions="*, Auto">
+                <Label Grid.Column="0" Text="🌙 Темна тема" VerticalOptions="Center" FontSize="16" TextColor="Black"/>
+                <Switch x:Name="ThemeSwitch" Grid.Column="1" Toggled="OnThemeSwitchToggled" OnColor="#27AE60"/>
+            </Grid>
+        </Frame>
+        
+        <Frame CornerRadius="10" BackgroundColor="#F8F9FA" Padding="15" BorderColor="LightGray" Margin="0,10,0,0">
+            <Grid ColumnDefinitions="*, Auto">
+                <Label Grid.Column="0" Text="📊 Підписи на пончику" VerticalOptions="Center" FontSize="16" TextColor="Black"/>
+                <Switch x:Name="ChartLegendSwitch" Grid.Column="1" Toggled="OnChartLegendSwitchToggled" OnColor="#2980B9"/>
+            </Grid>
+        </Frame>
+
+        <Label Text="Про додаток" FontSize="16" FontAttributes="Bold" Margin="0,10,0,0" TextColor="Gray"/>
+
+        <Frame CornerRadius="10" BackgroundColor="#F8F9FA" Padding="15" BorderColor="LightGray">
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Monetrack" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
+                <Label Text="Версія: 1.0.0 (Beta)" TextColor="Gray" FontSize="14"/>
+                <Label Text="Розроблено на .NET MAUI" TextColor="Gray" FontSize="12" Margin="0,5,0,0"/>
+            </VerticalStackLayout>
+        </Frame>
+
+    </VerticalStackLayout>
+</ContentPage>

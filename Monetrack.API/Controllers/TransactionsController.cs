@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using Dapper;
-using Monetrack.Shared.Models; 
+using Monetrack.Shared.Models;
 
 namespace Monetrack.API.Controllers
 {
@@ -49,6 +49,30 @@ namespace Monetrack.API.Controllers
                 _db.Execute(sql, transaction);
 
                 return Ok(new { message = "Транзакция успешно сохранена!" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteTransaction(string id)
+        {
+            try
+            {
+                string sql = "DELETE FROM Transactions WHERE Id = @Id";
+
+                int rowsAffected = _db.Execute(sql, new { Id = id });
+
+                if (rowsAffected > 0)
+                {
+                    return Ok(new { message = "Транзакцію успішно видалено!" });
+                }
+                else
+                {
+                    return NotFound(new { message = "Транзакцію не знайдено." });
+                }
             }
             catch (Exception ex)
             {

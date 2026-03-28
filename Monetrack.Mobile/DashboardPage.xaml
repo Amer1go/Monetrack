@@ -1,41 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Monetrack.Mobile"
+             xmlns:micro="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui" 
              x:Class="Monetrack.Mobile.DashboardPage"
-             Title="Мои финансы">
+             Title="Мої фінанси">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:AmountColorConverter x:Key="ColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <VerticalStackLayout Spacing="20" Padding="30">
 
-        <Label Text="Твой баланс:" FontSize="18" HorizontalOptions="Center"/>
+        <HorizontalStackLayout HorizontalOptions="End" Spacing="10">
+            <Button Text="⚙️ Налаштування" Clicked="OnSettingsClicked" BackgroundColor="Transparent" TextColor="Gray" Padding="5,0"/>
+            <Button x:Name="ViewToggleButton" Text="🍩 Графік" Clicked="OnToggleViewClicked" BackgroundColor="#F39C12" TextColor="White" CornerRadius="8" Padding="15,5"/>
+        </HorizontalStackLayout>
 
-        <Label x:Name="BalanceLabel" Text="Загрузка..." FontSize="36" FontAttributes="Bold" HorizontalOptions="Center" TextColor="Green"/>
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="20" Margin="0,-10,0,10">
+            <Button Text="&lt;" Clicked="OnPreviousMonthClicked" BackgroundColor="Transparent" TextColor="Gray" FontSize="24" FontAttributes="Bold" Padding="10,0"/>
+            <Label x:Name="MonthLabel" Text="Завантаження..." FontSize="20" FontAttributes="Bold" VerticalOptions="Center" WidthRequest="160" HorizontalTextAlignment="Center" TextColor="#2C3E50"/>
+            <Button Text="&gt;" Clicked="OnNextMonthClicked" BackgroundColor="Transparent" TextColor="Gray" FontSize="24" FontAttributes="Bold" Padding="10,0"/>
+        </HorizontalStackLayout>
 
-        <Label Text="История операций:" FontSize="18" FontAttributes="Bold" Margin="0,20,0,0"/>
+        <Frame x:Name="GraphPlaceholder" HeightRequest="300" IsVisible="False" CornerRadius="15" BackgroundColor="#F8F9FA" BorderColor="LightGray" Margin="0,0,0,10">
+            <micro:ChartView x:Name="DonutChartView" HeightRequest="280" BackgroundColor="Transparent"/>
+        </Frame>
 
-        <CollectionView x:Name="TransactionsList" HeightRequest="300">
+        <Label x:Name="BalanceTitleLabel" Text="Твій баланс:" FontSize="18" HorizontalOptions="Center"/>
+        <Label x:Name="BalanceLabel" Text="0.00 ₴" FontSize="36" FontAttributes="Bold" HorizontalOptions="Center" TextColor="Green"/>
+
+        <Label Text="Історія операцій:" FontSize="18" FontAttributes="Bold" Margin="0,10,0,0"/>
+
+        <CollectionView x:Name="TransactionsList" HeightRequest="250">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Margin="0,0,0,10" Padding="15" CornerRadius="8" BackgroundColor="#F8F9FA">
-                        <HorizontalStackLayout Spacing="15">
-                            <Label Text="{Binding Note}" FontSize="16" VerticalOptions="Center" WidthRequest="200"/>
-                            <Label Text="{Binding Amount, StringFormat='{0:F2} ₴'}" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" TextColor="Black"/>
-                        </HorizontalStackLayout>
+                        <Grid ColumnDefinitions="*, Auto, Auto" ColumnSpacing="15">
+                            <Label Grid.Column="0" Text="{Binding Note}" FontSize="16" VerticalOptions="Center" TextColor="Black"/>
+                            <Label Grid.Column="1" Text="{Binding Amount, StringFormat='{0:F2} ₴'}" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" TextColor="{Binding Amount, Converter={StaticResource ColorConverter}}"/>
+                            <Button Grid.Column="2" Text="❌" BackgroundColor="Transparent" Padding="5" 
+                                    CommandParameter="{Binding .}" Clicked="OnDeleteButtonClicked" />
+                        </Grid>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Button Text="+ Добавить 1000 ₴ (Зарплата)" 
-                Clicked="OnAddTestTransactionClicked" 
-                BackgroundColor="#27AE60" 
-                TextColor="White" 
-                CornerRadius="10" 
-                Margin="0,10,0,0"/>
 
-        <Button Text="Выйти" 
-                Clicked="OnLogoutClicked" 
-                BackgroundColor="#E74C3C" 
-                TextColor="White" 
-                CornerRadius="10" 
-                Margin="0,20,0,0"/>
+        <Button Text="+ Додати запис" Clicked="OnAddTransactionClicked" BackgroundColor="#27AE60" TextColor="White" CornerRadius="10" Margin="0,10,0,0"/>
+        <Button Text="Вийти" Clicked="OnLogoutClicked" BackgroundColor="#E74C3C" TextColor="White" CornerRadius="10" Margin="0,0,0,0"/>
 
     </VerticalStackLayout>
 </ContentPage>

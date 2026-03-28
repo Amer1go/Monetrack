@@ -75,6 +75,18 @@ namespace Monetrack.Mobile
                 return false;
             }
         }
+        public async Task<bool> DeleteTransactionAsync(string transactionId)
+        {
+            try
+            {
+                var response = await _http.DeleteAsync($"api/Transactions/{transactionId}");
+                return response.IsSuccessStatusCode;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
     }
 }
